@@ -50,3 +50,8 @@ picker {
   width:80%;
   margin:1rem auto;
 }
+.tip {
+  display: block;
+  margin: 1rem auto;
+  text-align: center;
+}

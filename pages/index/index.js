@@ -28,18 +28,18 @@ Page({
   formBindsubmit: function (e) {
     console.log('formBindsubmit')
     if (e.detail.value.name.length == 0 || e.detail.value.tel.length == 0) {
-      // this.setData({
-      //   tip: '提示：姓名和手机号码不能为空！',
-      //   name: '',
-      //   tel: ''
-      // })
+      this.setData({
+        tip: '提示：姓名和手机号码不能为空！',
+        name: '',
+        tel: ''
+      })
     } else {
       var that = this
-      // that.setData({
-      //   tip: '提交成功！',
-      //   name: e.detail.value.name,
-      //   tel: e.detail.value.tel
-      // })
+      that.setData({
+        tip: '提交成功！',
+        name: e.detail.value.name,
+        tel: e.detail.value.tel
+      })
       var wilddog = require('wilddog-weapp-all')
       var config = {
         syncURL: 'https://wd2314045701ifftmw.wilddogio.com',
