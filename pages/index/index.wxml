@@ -1,35 +1,38 @@
 
 <!--pages/apply/applysubject.wxml-->
-<view class="list">
+
+<form bindsubmit="formBindsubmit"  >
   <view class="item item-divider">
     请填写以下信息，方便我们联系您
   </view>
  <view class="item item-input">
       <span class="input-label"> 姓名 </span> 
-      <input type="text" class="text-right" placeholder="请输入您的真实姓名" />
+      <input type="text" class="text-right" name="name" placeholder="请输入您的真实姓名" />
     </view>
-  
-        <view class="item item-input">
+      <view class="item item-input">
       <span class="input-label"> 手机号码 </span> 
-      <input type="text" class="text-right" placeholder="请输入您的手机号码" />
+      <input type="text" class="text-right" name="tel" placeholder="请输入您的手机号码" />
     </view>
      
- <view class="item item-divider">
-    请选择业务
-  </view>    
+   
 <picker bindchange="bindPickerChange" value="{{areaIndex}}" range="{{area}}">      <view class="picker">  
-      当前选择：{{area[areaIndex]}}  
+      您想办理：{{area[areaIndex]}}  
     </view>  
 </picker>
 
+<picker bindchange="bindPickerChange" value="{{areaIndex1}}" range="{{area1}}">      
+<view class="picker">  
+      您想在哪里办理：{{area1[areaIndex1]}}  
+    </view>  
+</picker>
 
      <view class="item item-input">
-      <span class="input-label"> 联系地址 </span> 
-      <input type="text" class="text-right" placeholder="请填入您的联系地址" />
+      <span class="input-label"> 您的推荐人工号是 </span> 
+      <input type="text" name="adr" class="text-right" placeholder="请填入您的推荐人工号" />
     </view>
    
     <view class="padding-top">
-    <button size="" plain="" bindtap="" class=" energized-bg light "> 提交 </button>
-      
+    <button size="" plain="" bindtap="" formType="submit"> 提交 </button>
+    <span class="tip">{{tip}}</span>   
 </view>
-</view>
+</form>

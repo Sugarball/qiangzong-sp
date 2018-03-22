@@ -1,0 +1,11 @@
+{
+  "name": "qiangzong",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Sugarball/qiangzong-sp.git",
+  "author": "sugarball <sugarball@foxmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "wilddog": "^2.5.17"
+  }
+}

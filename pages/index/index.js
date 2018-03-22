@@ -7,11 +7,11 @@ Page({
     motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
-  },
-  data: {
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
     areaIndex: 0,
-    area: ['贷款', '存款', '一卡通', '随贷通']
+    area: ['贷款', '存款', '办卡'],
+    areaIndex1: 0,
+    area1: ['开化', '衢州', '江山'],
   },
   bindPickerChange: function (e) {
     this.setData({
@@ -19,45 +19,52 @@ Page({
     })
   },
   //事件处理函数
-  bindViewTap: function() {
+  bindViewTap: function () {
     wx.navigateTo({
       url: '../logs/logs'
     })
   },
-  onLoad: function () {
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
+
+  formBindsubmit: function (e) {
+    console.log('formBindsubmit')
+    if (e.detail.value.name.length == 0 || e.detail.value.tel.length == 0) {
+      // this.setData({
+      //   tip: '提示：姓名和手机号码不能为空！',
+      //   name: '',
+      //   tel: ''
+      // })
     } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
+      var that = this
+      // that.setData({
+      //   tip: '提交成功！',
+      //   name: e.detail.value.name,
+      //   tel: e.detail.value.tel
+      // })
+      var wilddog = require('wilddog-weapp-all')
+      var config = {
+        syncURL: 'https://wd2314045701ifftmw.wilddogio.com',
+        authDomain: 'wd2314045701ifftmw.wilddog.com'
+      }
+      wilddog.initializeApp(config)
+
+      var ref = wilddog.sync().ref("/");
+      console.log({
+        "name": e.detail.value.name,
+        "tel": e.detail.value.tel,
+        "rengonghao": e.detail.value.adr,
+        "banli": this.data.area[this.data.areaIndex],
+        "dizhi": this.data.area1[this.data.areaIndex1]
       })
+      ref.child("users").push({
+        "name": e.detail.value.name,
+        "tel": e.detail.value.tel,
+        "rengonghao": e.detail.value.adr,
+        "banli": this.data.area[this.data.areaIndex],
+        "dizhi": this.data.area1[this.data.areaIndex1]
+      });
+
     }
-  },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
+
   }
+
 })
